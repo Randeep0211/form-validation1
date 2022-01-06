@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.rocket{
+  width: 100px;
+  height: 100px;
+  background-image: url('/public/rocket.png');
+  background-color: white;
+}
+
+.style{
+  color:aqua;
+}
+
+body{
+  background-image: url('/public/back.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.h{
+  color: green;
+}
+
