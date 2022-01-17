@@ -5,33 +5,38 @@ import * as Yup from "yup";
 import axios from "axios";
 import Snackbar from "node-snackbar";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import styles from "./App.css"
 
 const initialState = {
-  Name: "",
-  Email: "",
-  Password: "",
+  Name: "dasd",
+  Email: "eve.holt@reqres.in",
+  Password: "asdadasas",
 };
 
 const api = "https://reqres.in/api/login";
 
 function Signup(props) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = async (values, helper) => {
     helper.setSubmitting(true);
-    await axios.post(api, {
-      email: values.Email,
-      password: values.Password,
-    }).then(function(response){
+    await axios
+      .post(api, {
+        email: values.Email,
+        password: values.Password,
+      })
+      .then(function (response) {
+        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        Snackbar.show({ text: response.data.token, pos: "top-center" });
 
-      console.log(response);
-      localStorage.setItem('token' , response.data.token)
-      Snackbar.show({text: response.data.token , pos:'top-center'})
-      navigate('/login')
-    }).catch(function(error){
-      return error
-    })
+        toast.success(response.data.token);
+        navigate("/login");
+      })
+      .catch(function (error) {
+        return error;
+      });
   };
 
   const validate = Yup.object({
@@ -65,8 +70,8 @@ function Signup(props) {
               value={formik.values.Name}
               onChange={formik.handleChange}
               error={formik.errors}
-              touched = {formik.touched}
-              onBlur = {formik.handleBlur}
+              touched={formik.touched}
+              onBlur={formik.handleBlur}
             ></Input>
             <Input
               name="Email"
@@ -76,8 +81,8 @@ function Signup(props) {
               value={formik.values.Email}
               onChange={formik.handleChange}
               error={formik.errors}
-              touched = {formik.touched}
-              onBlur = {formik.handleBlur}
+              touched={formik.touched}
+              onBlur={formik.handleBlur}
             ></Input>
             <Input
               name="Password"
@@ -87,8 +92,8 @@ function Signup(props) {
               value={formik.values.Password}
               onChange={formik.handleChange}
               error={formik.errors}
-              touched = {formik.touched}
-              onBlur = {formik.handleBlur}
+              touched={formik.touched}
+              onBlur={formik.handleBlur}
             ></Input>
           </div>
           <button className="btn btn-dark mt-3" type="submit">

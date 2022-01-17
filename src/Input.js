@@ -14,7 +14,7 @@ function Input({ label, ...props }) {
         autoComplete="off"
         // className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid'} w-25 `}
       />
-      <span className='text-danger'>{props.touched[props.name] && props.error[props.name]}</span>
+      <span className='text-info'>{props.touched[props.name] && props.error[props.name]}</span>
     </div>
   );
 }
